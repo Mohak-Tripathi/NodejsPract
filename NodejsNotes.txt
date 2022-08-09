@@ -48,3 +48,15 @@ When Not to use NodeJs ?
 1. CPU intensive applications 
 
 
+
+Ep -4
+
+NodeJs REPL -
+The REPL feature of Nodejs is very useful in experimenting with Nodejs codes and to debug Javascript codes. 
+
+REPL stands for=> 
+Read - Reads user's input, parses the input into Javascript data-structure, and stores in memory. 
+Eval - Takes and evaluates the data structure. 
+Print- Prints the result. 
+Loop- Loops the above command until the user presses ctrl+c twice. 
+
