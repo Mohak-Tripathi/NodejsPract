@@ -1,6 +1,50 @@
+Ep1- 
+
 What is Nodejs- 
 
 1. Nodejs is a "JavaScript runtime (enviornment)" built on "Chrome's V8" Javascript engine.
-2. Nodejs is A "JavaScript running on the server".
+2. Nodejs is A "JavaScript running on the server".  (Earlier you could use JS only in browser)
 
 Explaination => runtime environemnt is literally just the enviornment your application is running in.
+
+V8 JS Engine =>
+1. Built for google Chrome 
+2. Just-in-Time compiler
+3. No interpreter
+
+What Engines do?
+JS Code ===> Browser JS Engine ===> Machine Code (10001010101)
+
+
+History of Nodejs- 
+In 2009 an idea came in mind of "Ryan Dahl" (Google Engineer) that why not run "JS outside browser", so he took "V8 engine" and 
+embedded in a "C++ program" and called it "Node.exe" later on become "Node.js"
+
+So C++  AND V8 Engine => Node.exe => Node.js
+
+Remember that = Nodejs is not any framework or library or language. It is just JS run time Environent. 
+
+Fun Fact=> In 1995 Netscape written a program called "Netscape Enterprise Server" which allowed Developer to run JS at server side. 
+
+
+When to use NodeJs ?
+
+1. I/O bound 
+timeframe- 13:40 
+It can happen multiple requests at the same time so it is non blocking. So it handle asynchronous requests pretty well. 
+10 sec request OK but if 3 sec request came. So Nodejs will fetch 3 sec request and render it and after 7 sec it will render 10 sec vaali original request. 
+
+
+
+2. Data Streaming Applications 
+Like Netflix
+And infinite scrolling vaali applications like instagram, facebook etc
+
+3. Real time chat application Ex- whatsapp 
+
+
+When Not to use NodeJs ?
+
+1. CPU intensive applications 
+
+
