@@ -50,7 +50,7 @@ When Not to use NodeJs ?
 
 
 Ep -4
-
+REPL 
 
 NodeJs REPL -
 The REPL feature of Nodejs is very useful in experimenting with Nodejs codes and to debug Javascript codes. 
@@ -61,3 +61,73 @@ Eval - Takes and evaluates the data structure.
 Print- Prints the result. 
 Loop- Loops the above command until the user presses ctrl+c twice. 
 
+
+Extra Note- How to create folder in any drive (C:, E:) etc=> 
+1. mkdir 
+Ex- mkdir NODEJSPRACT 
+
+Note- How to create file  in any folder 
+1. type null > index.js 
+
+
+Now how to enter in REPL ENVIRONMENT - 
+simply write "node" and press enter in terminal 
+for exit => type .exit 
+
+
+Now question come what you can do with REPL or inside REPL environemnt  => 
+1. JS Expression (Js Expression is nothing combination of operand and operator) 
+Example = 5 - 3 
+8 /3 etc 
+
+2. Can use variable inside REPL Environent- 
+
+example - var = "mohak" 
+var b = "tripathi" 
+
+so then a+b = "mohaktripathi" in answer 
+
+3. Multiline code / loops 
+Ex- var x= 0;
+
+for (let i=0; i<5; i++){
+    console.log(x)
+}
+
+basically you can write code of multiple lines as well. For example loops etc are example of multiline. 
+
+4. use (_) AKA "underscore" to get the last result 
+Just imagine that you are calculating something then you did other stuff. You forgot the last computed value. Then you can use "_" to get the last result. 
+
+example - 10 + 14 
+24 
+
+24 + 5
+29 
+
+29 + 3 
+32
+
+Now  _
+32
+
+so then   _ + 3 = 35 
+_ + 11 = 46
+
+
+5. We can use editor mode    
+node 
+
+.editor // to enter editor mode 
+
+ctrl+ D to finish (mtlb execute krne ke liye) and ctrl+C to cancel 
+
+EX - const name = (myname) => console.log(`my name is ${myname}`)
+
+name("mohak")
+
+now enter ctrl + D 
+
+
+
+Extra info : Inside REPL environemnt just press 2 times "tab button" and you will get list of all properties and methods of nodejs
