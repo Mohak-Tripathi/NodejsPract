@@ -1,0 +1,6 @@
+What is Nodejs- 
+
+1. Nodejs is a "JavaScript runtime (enviornment)" built on "Chrome's V8" Javascript engine.
+2. Nodejs is A "JavaScript running on the server".
+
+Explaination => runtime environemnt is literally just the enviornment your application is running in.
