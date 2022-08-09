@@ -130,4 +130,64 @@ now enter ctrl + D
 
 
 
-Extra info : Inside REPL environemnt just press 2 times "tab button" and you will get list of all properties and methods of nodejs
+Extra info : Inside REPL environemnt just press 2 times "tab button" and you will get list of all properties and methods of nodejs   
+
+
+
+Ep: 5 (Nodejs Core Modules)   
+
+Consider modules to be the same as "Javascript libraries". A set of function you want to include in your position.
+
+Similarly, Nodejs has a set of built-in modules which you can use without any further installation. 
+
+So core modules gives you power that you can play with file system,
+ can create your own server and interact/ play with operating system inside Nodejs. 
+
+ Ex- const fs = require("fs");
+
+ //creating a new file - 
+ fs.writeFileSync("readme.txt", "Welcome Mohak")
+
+ If you haven't created file with readme.txt then it will create one and if already exists, then it will just add the text.
+
+ NOw if you do the same again - 
+  fs.writeFileSync("readme.txt", "Welcome Mohak Tripathi you are awesome") 
+Then it will replace the earlier text and override the same. 
+
+if you don't want that data should replace- 
+the use 
+fs.appendFileSync("readme.txt", "Welcome Mohak Tripathi you are awesome")
+
+
+How to read other file data ? 
+ const buf_data =  fs.readFileSync("readme.txt") 
+console.log(buf_data)
+
+output - <Buffer 57 65 6c 63 6f 6d 65 20 4d 6f 68 61 6b 20 74 72 69 70 61 74 68 69 20 61 67 61 69 6e 57 65 6c 63 6f 6d 65 20 6a 75 6d 61 6e 6a 69 20 20 20 57 65 6c 63 ... 11 
+more bytes>     
+(GOT DATA IN "binary FORM" )
+
+//Nodejs includes an additional data type called "Buffer" 
+// (Not available in browser's JavaScript) 
+// Buffer is mainly used to store binary  data, while reading from a file or receiving packets over the network . 
+
+So how to tackle ? 
+
+const org_data = buf_data.toString() 
+console.log(org_data) 
+
+
+
+
+How to rename the file ? 
+
+fs.renameSync("readme.txt", "learn.txt")  // old name and new name
+
+
+
+
+
+
+
+
+
