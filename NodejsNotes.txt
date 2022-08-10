@@ -185,9 +185,109 @@ fs.renameSync("readme.txt", "learn.txt")  // old name and new name
 
 
 
+Ep - 6 -
+Challenge time=> 
+
+1. Create a folder named it "Thapa" 
+2. Create a file in it named "bio.txt" and data into it. 
+3. Add more data into file in the existing file . 
+4. Read data without getting the buffer data at first .
+//file decoding 
+5. Rename the file name to "mybio.txt"
+6. now delete both file and folder . 
+
+Ans - 
+From index.js -
+1. fs.mkdirSync("thapa")
+2. fs.writeFileSync("thapa/bio.txt", "my name is mohaktripathi")
+3. fs.appendFileSync("thapa/bio.txt", "hello my name is Rakesh")
+
+4. const data= fs.readFileSync("thapa/bio.txt", "utf-8") //encoding in 2nd parameter 
+console.log(data)
+
+5. fs.renameSync("thapa/bio.txt", "thapa/mybio.txt")
+
+6. Two ways to delete - 
+6 (i) Delete the file -
+
+fs.unlinkSync("thapa/mybio.txt")
+
+6(ii) And now delete folder too- 
+
+fs.rmdirSync("thapa")
+
+
+
+Ep-7 Nodejs file System Asynchronously 
+
+How to create folder asynchronously - 
+const fs= require("fs") 
+
+fs.mkdir("pp", function(err){
+    console.log("dir created")
+})
+
+
+How to create file asynchronously - 
+fs.writeFile("pp/readme.txt", "today is awesome day", function(err){
+console.log("file is created") 
+console.log(err) // null ayega yha . Hai hi ni. 
+})
+
+
+Note- You have to provide callback function in asynchronous way otherwise it will 
+throw error. 
+
+So, 
+we pass them a function as an argument - a callback - that gets 
+called when that task completes. The callback has an argument that tells 
+you whether the operation completed successfully. 
+So, we need to say what to do when fs.writeFile has completed (even if it's nothing) , and checking the error. 
+
+
+How to append data asynchronous- 
+fs.appendFile("pp/readme.txt", "plz help me" , function(err){
+  console.log("done");
+
+})
+
+
+How  to read data asynchronous- 
+
+fs.readFile("readme.txt", "UTF-8", function(err, data){
+console.log(data)
+})
+
+
+
+Ep-8 - Synchronous vs Asynchronous   
+
+const fs = require("fs") 
+
+const data= fs.readFileSync("readme.txt", "UTF-8") 
+console.log(data)   
+
+console.log("After reading data" )  
+
+In this case- Output - 
+First from file whatever is in "readme.txt" even if it take 10 sec    
+After that - "After reading data"    // will print.   
+
+
+
+Now Asynchronously - 
+fs.readFile("readme.txt", "utf8", function(err, data){
+  err ? console.log(err) : console.log(data)
+})
+
+console.log("After reading data" )  
+
+Here Output- 
+You will get "After reading data" first 
+and then whatever in the "readme.txt" file . 
 
 
 
 
-
+Ep - 9- Node.JS Challenge #2: Asynchronous CRUD Operations using File System Modules
 
