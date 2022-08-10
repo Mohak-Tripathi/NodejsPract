@@ -287,7 +287,84 @@ You will get "After reading data" first
 and then whatever in the "readme.txt" file . 
 
 
+Note= Always do operation asynchronously. 
 
 
 Ep - 9- Node.JS Challenge #2: Asynchronous CRUD Operations using File System Modules
 
+1. Create a folder named it "Thapa" 
+2. Create a file in it named "bio.txt" and data into it. 
+3. Add more data into file in the existing file . 
+4. Read data without getting the buffer data at first .
+//file decoding 
+5. Rename the file name to "mybio.txt"
+6. now delete both file and folder . 
+
+Same task but this time with asynchronous way- 
+const fs = require("fs")
+
+1. fs.mkdir("thapa", (err)=>{
+  console.log("folder created")
+})
+
+2. fs.writeFile("./thapa/bio.txt", "my name is MT", (err)=>{
+  console.log("file created")
+})
+
+3. fs.appendFile("./thapa/bio.txt", " my friend name is ST", function(err){
+  console.log("file data added")
+})
+
+4. fs.readFile("./thapa/bio.txt", "utf-8", function(err, data){
+  console.log(data)
+})
+
+5. fs.rename("./thapa/bio.txt", "./thapa/mybio.txt", function(err){
+  console.log("done")
+})
+
+6. first delete file - 
+fs.unlink("./thapa/mybio.txt", (err)=>{
+  console.log("done")
+})
+
+Now folder - 
+
+fs.rmdir("./thapa", (err)=> {
+  console.log("done")
+})
+
+
+Ep-10  Node.JS OS Module To Get Operating System Info
+
+const os = require("os");
+
+console.log(os.arch()) // Get to know the architecture of your os-  x64 or x32  
+
+How much free Memory I have - 
+
+const freeMemory = os.freemem(); 
+console.log(freeMemory) // Get to know the free memory in "byte" 
+//SO we have to change the same in GB - 
+
+console.log(`{freeMemory/ 1024 / 1024 / 1024}`) // Get to know the free memory in "GB" 
+
+
+How much total Memory I have - 
+
+const totalMemory = os.totalmem() 
+
+console.log(`${totalMemory/1024/1024/1024}`) // Get to know the total memory in "GB" 
+
+console.log(os.hostname()) // to know hostname 
+console.log(os.platform()) // to know platform
+console.log(os.type()) // just wait after . 
+
+Ep - 11 Path Module In Nodejs  
+Path module for working with File and directory path .
+So path modules provides utilities for working with file and directory path. 
+
+
+
+
+There are a lot. Try to read bu yourself. 
