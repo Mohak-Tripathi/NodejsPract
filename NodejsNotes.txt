@@ -439,3 +439,51 @@ console.log(sub(13,5))
 console.log(name)
 
 
+Ep -13 Node Package Manager (NPM) 
+What is NPM - 
+https://www.geeksforgeeks.org/node-js-npm-node-package-manager/
+https://nodejs.org/en/knowledge/getting-started/npm/what-is-npm/
+
+Do - npm i // to accept npm 
+
+What is package.json - 
+Basically it like a repository which tells you how many packages/ library you have installed in your application 
+
+ex- npm i chalk , so chalk here is "module"
+
+What is package-lock.json - 
+Basically it describe the package in more details. So ex- "chalk", module ka version, integrity etc. Not really in use in real world. 
+
+Example- 
+const chalk = require("chalk") 
+const validator= require("validator")
+
+console.log(chalk.red.underline.inverse("success"))   // just one example. see package. easy to use.
+
+
+const res= validator.isEmail("mohak@gamil.com");
+
+console.log(res ? chalk.green.inverse(res) : chalk.red.inverse(res))
+
+What is node module- 
+whatever dependencies we use it's code store in nodemodule. So we use directly the package but us package ka code to hoga na kahi. That place is node module. 
+
+
+ep-14- Import Global NPM Module in Node JS
+
+Note- packages are called modules in nodejs (debatable)
+
+What are global NPM module ? 
+So local npm modules can be used in that particular folder but global npm modules can be used in other folder or any other directory. Basically can be used any where in your machine after installing once. 
+
+npm install nodemon -g  // now it won't install locally. it won't show in package.json becz it is installed in "operating system" and no need to install again and again. 
+
+
+
+Node JS #15: Module Wrapper Function in Node.JS
+
+"module.exports" and "require" etc ye sab aate kha se hai ???
+
+ans - module wrapper function. 
+
+So in Nodejs every file is called "module" and every variable and function created inside has a private scope. 
