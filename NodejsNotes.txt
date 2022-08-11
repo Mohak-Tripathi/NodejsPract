@@ -365,6 +365,77 @@ Path module for working with File and directory path .
 So path modules provides utilities for working with file and directory path. 
 
 
+const path = require("path")
+
+console.log(path.dirname("G:/NodejsPract/PathModule/path.js"))  // to know the directory 
+Ans=> G:/NodejsPract/PathModule
 
 
-There are a lot. Try to read bu yourself. 
+console.log(path.extname("G:/NodejsPract/PathModule/path.js"))   // to get extension name 
+Ans => .js 
+
+console.log(path.basename("G:/NodejsPract/PathModule/path.js"))   // to know file name
+Ans => path.js
+
+
+console.log(path.parse("G:/NodejsPract/PathModule/path.js"))   // to know everything in one go- 
+Ans-> 
+{
+  root: 'G:/',
+  dir: 'G:/NodejsPract/PathModule',
+  base: 'path.js',
+  ext: '.js',
+  name: 'path'
+}
+
+Now agar ek hi property chahiye so-   
+
+
+const myPath= path.parse("G:/NodejsPract/PathModule/path.js")
+
+console.log(myPath.root)   
+console.log(myPath.base)  
+
+
+
+Ep12- 
+Node.JS #12: How to CREATE and EXPORT Our Own Modules in Node JS 
+
+We have seen till now all inbuilt module, now we will see how to create module of our own- 
+
+Note- In Nodejs every individual file is called module and every function & variable inside one particular module has private scope. So, 
+use "module.exports" and "require" to connect different modules. 
+
+file name- 
+operator.js 
+
+const add = (a,b) => {
+  return a + b; 
+}
+
+const sub = (a,b) =>{
+  return a-b; 
+}
+
+const name= "mohak" 
+
+module.exports = add; // exporting 
+
+// if need to export add & sub both - 
+
+module.exports.add = add;
+module.exports.sub = sub;
+
+more good way- 
+module.exports = {add, sub} // final version. 
+
+index.js 
+
+const add = require("./operator)  // importing 
+
+const {add, sub} = require("./operator") // if two or more value are getting import from source file. 
+console.log(add(5,8))
+console.log(sub(13,5))
+console.log(name)
+
+
