@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require("fs");
 
 const server = http.createServer((req, res) => {
   //  console.log(req.url)
@@ -8,7 +9,17 @@ const server = http.createServer((req, res) => {
   } else if (req.url === "/about") {
     res.end("Hello from about side");
   } else if (req.url === "/contact") {
-    res.end("Hello from contact side");
+
+    fs.readFile(`${__dirname}/UserApi/userapi.json`, "utf-8", function(err, data){
+      console.log(err) // to see in terminal 
+      res.end(data) // to see in browser UI   
+  
+      // const objData = JSON.parse(data) 
+      // res.end(objData[0].name)
+  
+    })
+
+
   } else {
     res.writeHead(404, { "Content-Type": "text/html" });
     res.end(" <h1> 404 Not Found. Page not found. <h1>");

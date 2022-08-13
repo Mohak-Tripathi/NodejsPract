@@ -662,3 +662,170 @@ server.listen(8000, "127.0.0.1", ()=>{
 JSON stands for JavaScript Object Notation. JSON is a lightweight format for storing and transporting data. 
 JSON is often used when data is sent from a server to a web page. 
 
+
+Let obj = {
+  name : "MOHAK",
+  age: 23
+}
+
+How to change obj in JSON data- 
+let obj1 = JSON.stringify(obj)
+
+And you can't do "obj.age" in JSON format. 
+
+hOW TO CHANGE JSON data in Obj 
+let obj2 = JSON.parse(obj1)
+
+
+So MiniTask- 
+1. Convert Obj to JSON format
+2. Add to the new file. 
+3. Read that File
+4. Again convert back to js object original 
+5. Console.log  
+
+const fs= require("fs")
+
+Let obj = {
+  name : "MOHAK",
+  age: 23
+}
+
+1. const jsonDataDaalooo= JSON.stringify(obj)
+
+2. fs.writeFile("json1.json", jsonDataDaalooo, (err)=>{
+  console.log("done")
+})
+
+3. fs.readFile("json1.json", "utf-8", (err, data)=>{
+  console.log(data)
+})
+
+Phela hi step -3
+4/5. fs.readFile("json1.json", "utf-8", (err, data)=>{
+  console.log(data)
+
+  const orgData= JSON.parse(data)
+  console.log(orgData)
+
+})
+
+
+
+Ep- 19 -  #19: Create Simple API (Application Programming Interface) In Node JS 
+
+What is API? 
+It is a software intermediate that allows two  applications to talk 
+to each other. Each time you use an app like Facebook, send a instant Message, 
+or check the weather on your Phone. You are using API.
+
+
+
+
+const http = require("http"); 
+
+const server = http.createServer((req, res) =>{
+
+
+if(req.url === "/"){
+  res.end("Hello from other sides")
+}
+else if(req.url === "/about"){
+  res.end("Hello from about side")
+}
+else if(req.url === "/contact"){
+  res.end("Hello from contact side")  
+  // you can write this in 2 lines too. 
+
+like this- 
+  res.write("Hello from contact side")
+  res.end()
+
+}
+else if(req.url == "/userapi"){
+  fs.readFile(`${__dirname}/UserApi/userapi.json`, "utf-8", function(err, data){
+    console.log(data) // to see in terminal 
+    res.end(data) // to see in browser UI   
+
+    Now if you need to access any particular object, then you have to change it in in object format from JSON.   
+
+    const objData = JSON.parse(data) 
+    res.end(objData[0].name)
+
+  })
+}
+else{
+  res.writeHead(404, {"Content-Type": "text/html"})
+  res.end(" <h1> 404 Not Found". Page not found. <h1>" )
+}
+
+})
+
+
+But here there is a problem. Everytime i am refresing my browser, 
+API call is making which not so good. So use "synchronous way". 
+
+
+
+
+
+Revised one- 
+
+
+
+
+
+const http = require("http"); 
+const fs = require("fs"); 
+
+const server = http.createServer((req, res) =>{
+
+ const data=  fs.readFileSync(`${__dirname}/UserApi/userapi.json`, "utf-8")
+const objData = JSON.parse(data)
+
+
+if(req.url === "/"){
+  res.end("Hello from other sides")
+}
+else if(req.url === "/about"){
+  res.end("Hello from about side")
+}
+else if(req.url === "/contact"){
+  res.end("Hello from contact side")  
+  
+}
+else if(req.url == "/userapi"){
+  res.writeHead(200, {"content-Type": "application/json"})
+    res.end(objData[0].name)
+
+}
+else{
+  res.writeHead(404, {"content-Type": "text/html"})
+  res.end(" <h1> 404 Not Found. Page not found. <h1>" )
+}
+
+})
+
+
+
+
+server.listen(8000, "127.0.0.1", ()=>{
+  console.log("Listening to port number 8000")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
