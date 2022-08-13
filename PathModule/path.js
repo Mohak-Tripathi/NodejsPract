@@ -8,7 +8,11 @@ const path = require("path")
 
 // console.log(path.parse("G:/NodejsPract/PathModule/path.js"))  
 
-const myPath= path.parse("G:/NodejsPract/PathModule/path.js")
+// const myPath= path.parse("G:/NodejsPract/PathModule/path.js")
 
-console.log(myPath.root)   
-console.log(myPath.base)  
+// console.log(myPath.root)   
+// console.log(myPath.base)  
+
+
+console.log(__filename)
+console.log(__dirname)

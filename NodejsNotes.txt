@@ -487,3 +487,178 @@ Node JS #15: Module Wrapper Function in Node.JS
 ans - module wrapper function. 
 
 So in Nodejs every file is called "module" and every variable and function created inside has a private scope. 
+why they are private scoped? 
+
+so for example- 
+
+const name= "mohak" 
+console.log(name) 
+
+so when you execute the piece of code, at compilation time-  Nodejs wrape the code inside a wrapper function 
+
+so at run time- 
+
+(function(exports, require, module, __filename, __dirname){ 
+  const name= "mohak" 
+  console.log(name)
+})()    // it look like this behined the scene
+
+And as you can see, wrapper function is in form of IIFE (Immediately invoked function expression) - so anything inside the function has "local scope".  
+So, exports, require, module, __filename, __dirname => these are not global but local scoped. Every individual module (/ file) has these "exports, require, module, __filename, __dirname" things locally scoped. 
+
+
+so final version - 
+
+(function(exports, require, module, __filename, __dirname){ 
+
+const fs= require("fs");
+
+const age = require("./age")
+  const name= "mohak" 
+
+console.log(age)
+
+  console.log(name)
+
+  module.exports= name;
+})() 
+
+
+Similarly- other parameter - 
+
+console.log(__dirname)
+console.log(__filename) 
+
+kahi bhi likho in file, you will get to know the directory and filename. 
+
+Note= You don't need to create IIFE function, automatically create hota hai. If you will do, it will throw error. 
+
+Side Note- What is IIFE (Immediately invoked function expression)- 
+An IIFE is a JS function that runs as soon as it is defined. 
+It is a design pattern which is also known as a "Self-Executing Anonymous Function" and contains two majour parts. 
+
+1. The first is the Anonymous function with lexical scope enclosed within the "Grouping Operator ()". This prevents accessing variables within the IIFE idiom as well as polluting the global scope. 
+2. The second part creates the Immediately invoked function expression() through which the JS engine will directly intrepret the function. 
+
+
+So use IIFE when you want your data to be private and second is you don't want your function to be dependent on anybody to run. Once page refresh, it should be called. 
+
+
+Ex- (function(){
+var a= "MT"
+  console.log("Author name is Vinod")
+})()
+
+console.log(a) // a is not defined error. 
+
+Remember - It should be Anonymous function. 
+
+Also you can pass arguments->
+
+(function(aName){
+  console.log(`Author name is ${aName}`)
+}
+
+)("thapa")  // thapa 
+
+
+
+
+
+
+
+16: Creating Our Own Web Server in Node.JS | HTTP Module in Node JS-
+
+
+
+To access "web pages" of any web applocation, you need a "web server". 
+The web server will also handle all the http requests for the web application. 
+
+Eg- "IIS" is a web server for ASP.NET web applications and "Apache" is a web server for PHP or Java web applications. 
+
+Nodejs provides capabilities to create your own web server which will handle HTTP requests asynchronously. You can use 
+IIS and Apache to run Nodejs web application but it is recommended to use Nodejs web server. 
+So you don't need external 3rd party to start server of Nodejs. 
+
+
+To create Server, we must use - 
+1. The http.createServer() method includes request and response parameters 
+which is supplied by Nodejs. 
+
+2. The request object can be used to get information about the current HTTP request. 
+e.g- url, request header, and data. 
+
+3. The response object can be used to send a response for a current HTTP request. 
+
+4. If the response from the HTPP server is supposed to be displayed as HTML, 
+you should include an HTTP header with the correct content type. 
+
+
+
+eg - const http = require("http"); 
+
+const server = http.createServer((req, res) =>{
+  res.end("Hello from other side") // so jab server bna, hm ye hi response bhejenge. Kuch to bhjena hi hai. 
+
+})
+
+
+server.listen(8000, "127.0.0.1", ()=>{
+  console.log("Listening to port number 8000")
+})
+
+So our server ready. Just run file- node index.js 
+and open browser with localhost/8000 - you will see the response. 
+
+
+
+#17: Node JS Routing | Handled HTTP Requests in Node.JS 
+
+play with if and else for "routing"
+
+
+
+
+const http = require("http"); 
+
+const server = http.createServer((req, res) =>{
+
+//  console.log(req.url)
+
+if(req.url === "/"){
+  res.end("Hello from other sides")
+}
+else if(req.url === "/about"){
+  res.end("Hello from about side")
+}
+else if(req.url === "/contact"){
+  res.end("Hello from contact side")  
+  // you can write this in 2 lines too. 
+
+like this- 
+  res.write("Hello from contact side")
+  res.end()
+
+}
+else{
+  res.writeHead(404, {"Content-Type": "text/html"})
+  res.end(" <h1> 404 Not Found". Page not found. <h1>" )
+}
+
+})
+
+Note- // watch network tab in console as well.  
+
+server.listen(8000, "127.0.0.1", ()=>{
+  console.log("Listening to port number 8000")
+})
+
+
+
+
+
+#18: Complete JSON in Node JS 
+
+JSON stands for JavaScript Object Notation. JSON is a lightweight format for storing and transporting data. 
+JSON is often used when data is sent from a server to a web page. 
+

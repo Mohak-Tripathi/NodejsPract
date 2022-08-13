@@ -1,4 +1,4 @@
-const fs= require('fs');
+// const fs= require('fs');
 
 // fs.mkdir("thapa", (err)=>{
 //     console.log("folder created")
@@ -108,3 +108,4 @@ const fs= require('fs');
 // console.log(org_data) 
 
 // fs.renameSync("readme.txt", "learn.txt")
+
