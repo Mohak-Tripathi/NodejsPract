@@ -816,16 +816,120 @@ server.listen(8000, "127.0.0.1", ()=>{
 
 
 
+ep -20: Events Module in Node.JS | Handling Events in Node.js with EventEmitter 
+
+Events Module // Events and not Event
+
+
+Nodejs has a built-in module, called "Events" - where you can
+create-, fire-, and listen for- your own events. 
+
+EXAMPLE1 - Registering for the event to be fired only one time using once.  
+Example 2- Create an event emitter instance and register a couple of callbacks. 
+Example3- Registering for the event with callback parameter. 
+
+
+const EventEmitter = require("events")   // here EventEmitter is class and not variable. 
+
+Now create object with the help of class. 
+
+const event = new EventEmitter()  // now event is object and you can access "events" module property from this. 
+
+
+event.on("sayMyName", ()=>{
+  console.log("my name is mohak")
+})
+
+event.emit("sayMyName")    // here emit means fire the event handler basically. 
+
+
+
+So khud ka event is "emit" and what should happen with it- "on" 
+
+Note= if you fire the event before registering or telling what to do, it won't work. So basically 
+
+"on" should come before "emit". Reason - ??
+
+"Emitter objects emit "named events" (here "sayMyName") that cause previously registered listeners to be called. 
+So, an emitter object basically has two main features. 
+
+1. Emitting name events. 
+2. Registering and unregistering listener functions. 
+
+Example 1 done. 
+
+
+Now Example 2- 
+
+
+const EventEmitter = require("events")   
+
+
+const event = new EventEmitter()  // Created an event emitter instance
+
+event.on("sayMyName", ()=>{
+  console.log("my name is mohak")
+})
+
+event.on("sayMyName", ()=>{
+  console.log("my name is kumar")
+})
+
+event.on("sayMyName", ()=>{
+  console.log("my name is tripathi")
+})
+
+// register multiple callabacks. 
+So by clicking one button you can call multiple functions together. You can't do that in JS. (difficult) 
+
+event.emit("sayMyName") 
+
+
+
+Now example 3- 
+
+
+
+const EventEmitter = require("events")   
+
+
+const event = new EventEmitter()  
+
+event.on("checkPage", (status code, msg) =>{
+  console.log(`status code is ${status code} and msg is ${msg}`)
+})
+
+event.emit("checkPage", 200, "ok") 
+
+Note- 
+in js we pass arguments like this- 
+checkPage(200, "ok")
 
 
 
 
+EP- 21- Nodejs Stream - 
+
+"Strems" are objects that let you read data from a source or write 
+data to a destination in continous fashoin. In Nodejs, there are 4 
+types of streams- 
+
+Streaming means listening to music or watching video in "real-time", instead of
+downloading a file to your computer and watching it later. 
+
+1. Readable- Stream which is used for read operation. 
+2. Writable - Stream which is used for write operation.
+3. Duplex- Stream which can used for both read and write operations.
+4. Transform- A type of duplex stream, where the output is computed based on the input. 
+
+Note- First 2 used mostly. 
 
 
+Also, 
+Each type of stream is an "Event Emitter" instance and throws several events 
+at different instance of times. For example, some of the commonly used events are- 
 
-
-
-
-
-
-
+1. data- This event is fired when there is data available to read. 
+2. end- This event is fired when there is no more data to read. 
+3. error- This event is fired when there is any error receiving or writing data. 
+4. finish- This event is fired when all the data has been flushed to underlying system. 
