@@ -933,3 +933,344 @@ at different instance of times. For example, some of the commonly used events ar
 2. end- This event is fired when there is no more data to read. 
 3. error- This event is fired when there is any error receiving or writing data. 
 4. finish- This event is fired when all the data has been flushed to underlying system. 
+
+
+Extra Video not from this series-   
+Events Module in Node.js | Handle Events in Node.js with EventEmitter | Create Your Own Events
+
+1. How to Use Event Module ? 
+
+const fs= require("fs") // Abhi tak we were doing like this. Here fs in object
+// and we use any method on that object- fs.readFile("") etc. 
+
+
+const EventEmitter= require("events") // Here EventEmitter is class provided by events. 
+
+const myEmitter = new EventEmitter() // creating object from class. 
+
+
+//Register event listener 
+
+myEmitter.on("myName", ()=>{
+  console.log("I am Nitin Sharma")
+})
+
+myEmitter.emit("myName") // emit or call that event 
+
+
+2. Passing arguments and this to listener (of our own created event)=> Use arrow and Normal Callback 
+
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin Sharma and I have "+exp+" years of experience")
+})
+
+myEmitter.emit("myName", 10) 
+
+Also its second part- "this"
+
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", function(exp){
+
+  console.log(this)   // if you use "arrow" callback function - It won't work 
+  console.log("I am Nitin Sharma and I have "+exp+" years of experience")
+})
+
+myEmitter.emit("myName", 10)  // emit bind this object. 
+
+
+3. Handle Events once- 
+
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+//I am listening same event i.e. "myName" 3 times- 
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin")
+})
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin Sharma")
+})
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin Sharma and I have "+exp+" years of experience")
+})
+
+//So i have created 3 listeners for same event- 
+myEmitter.emit("myName", 10) 
+
+--------------------------------------------
+
+Now come to que- 
+
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin and I have "+exp+" years of experience")
+})
+
+
+//So now i am calling same listener 3 times-
+myEmitter.emit("myName", 10)
+myEmitter.emit("myName", 15)
+myEmitter.emit("myName", 20)
+
+but if you want to listen your event one time only it doesn't matter how many times it is called'
+use- 
+myEmitter.once("myName", (exp)=>{
+  console.log("I am Nitin and I have "+exp+" years of experience")
+})
+
+Now 15 year and 20 year experience vaale bekar ho gye
+
+
+4. Synchronous vs Asynchronous - 
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin")
+})
+
+myEmitter.on("myName", (exp)=>{
+  console.log("I am Nitin Sharma")
+})
+
+
+console.log("Start")
+myEmitter.emit("myName", 10) 
+console.log("End")
+
+
+o/p - 
+Start
+I am Nitin
+I am Nitin Sharma
+End
+
+So, Nodejs calls all events synchronously. 
+
+But if we want to call our event listeners asynchronously then - 
+use "setImmediate" OR "process.nextTick()"
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", (exp)=>{
+  setImmediate(()=>{
+    console.log("I am Nitin")
+  })
+
+  OR 
+
+  process.nextTick(()=>{
+    console.log("I am Nitin")
+  })
+})
+
+
+console.log("Start")
+myEmitter.emit("myName", 10) 
+console.log("End")
+
+O/P- 
+
+Start
+End
+I am Nitin
+
+
+Second Variation => Means asynchronous mei synchronous hai => Samjhe ? 
+
+
+const EventEmitter= require("events") 
+
+const myEmitter = new EventEmitter()
+
+myEmitter.on("myName", (exp)=>{
+  setImmediate(()=>{
+    console.log("I am Nitin")
+  })
+// process.nextTick(()=>{
+//     console.log("I am Nitin")
+//   })
+
+})
+
+myEmitter.on("myName", (exp)=>{
+      setImmediate(()=>{
+        console.log("I am Nitin Sharma")
+      })
+    
+    
+    })
+
+
+console.log("Start")
+myEmitter.emit("myName", 10) 
+console.log("End")
+
+o/p - 
+
+Start
+End
+I am Nitin
+I am Nitin S
+
+
+
+5. Error Events- 
+
+When eventhas any issues, it will throw an error. And if won't be handled properly- It will crash our server. 
+use - 
+
+myEmitter.on("error", ()=>{
+  console.log("Error")
+})
+
+
+
+const EventEmitter = require("events");
+
+const myEmitter = new EventEmitter();
+
+
+
+myEmitter.on("myName", (exp) => {
+  seImmediate(() => {
+    console.log("I am Nitin");
+  });
+});
+
+myEmitter.on("error", (err) => {
+    console.log("Error", err);
+  });
+
+
+
+console.log("Start");
+myEmitter.emit("myName", 10);
+console.log("End");
+
+
+6. emitter.addListener(eventName, listener) => Alias for emitter.on 
+
+7. emitter.emit() - Synchronously calls each listener in the order they are added/registered - Dekh Chuke- By default it is synchronous 
+
+8.  emitter.eventNames()  &&  emitter.getMaxListeners()
+emitter.eventNames() - return all event names  
+emitter.getMaxListeners() - return max number of listeners allowed 
+
+
+
+const EventEmitter = require("events");
+
+const myEmitter = new EventEmitter();
+
+
+myEmitter.on("myName", (exp) => {
+  setImmediate(() => {
+    console.log("I am Nitin");
+  });
+});
+
+myEmitter.on("error", (err) => {
+    console.log("Error", err);
+  });
+
+
+myEmitter.emit("myName", 10);
+
+console.log(myEmitter.eventNames())  //[ 'myName', 'error' ]
+console.log(myEmitter.getMaxListeners()) //10
+
+o/p- [ 'myName', 'error' ]
+10
+I am Nitin
+
+
+
+9. emitter.listenerCount(eventName) => return total listeners of specified event
+
+
+
+const EventEmitter = require("events");
+
+const myEmitter = new EventEmitter();
+
+
+
+myEmitter.on("myName", (exp) => {
+  setImmediate(() => {
+    console.log("I am Nitin");
+  });
+});
+
+
+myEmitter.on("myName", (exp) => {
+    setImmediate(() => {
+      console.log("I am Nitin");
+    });
+  });
+
+myEmitter.on("error", (err) => {
+    console.log("Error", err);
+  });
+
+
+
+myEmitter.emit("myName", 10);
+
+
+console.log(myEmitter.listenerCount("myName"))  //2
+
+
+10. emitter.listeners(eventName) => returns all listeners
+
+
+const EventEmitter = require("events");
+
+const myEmitter = new EventEmitter();
+
+
+
+myEmitter.on("myName", (exp) => {
+  setImmediate(() => {
+    console.log("I am Nitin");
+  });
+});
+
+
+myEmitter.on("myName", (exp) => {
+    setImmediate(() => {
+      console.log("I am Nitin");
+    });
+  });
+
+myEmitter.on("error", (err) => {
+    console.log("Error", err);
+  });
+
+
+
+myEmitter.emit("myName", 10);
+
+console.log(myEmitter.listeners("myName"))   // [ [Function (anonymous)], [Function (anonymous)] ]
